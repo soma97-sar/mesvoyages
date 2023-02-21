@@ -21,7 +21,7 @@ class VisiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Visite::class);
     }
 
-    public function save(Visite $entity, bool $flush = false): void
+    public function add(Visite $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -38,6 +38,21 @@ class VisiteRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    /**
+     * Retourne toutes les visites triées sur un champ
+     * @param type $champ
+     * @param type $ordre
+     * @return Visite[]
+     */
+    public function findAllOrderBy($champ, $ordre):array{
+    return $this->createQueryBuilder('v')
+            ->orderBy('v.'.$champ,$ordre)
+            ->getQuery()
+            ->getResult();
+    
+    }
+        
+    
 
 //    /**
 //     * @return Visite[] Returns an array of Visite objects
