@@ -21,7 +21,7 @@ class EnvironnementRepository extends ServiceEntityRepository
         parent::__construct($registry, Environnement::class);
     }
 
-    public function save(Environnement $entity, bool $flush = false): void
+    public function add(Environnement $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
