@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 class VisiteType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -37,6 +38,10 @@ class VisiteType extends AbstractType
                 'choice_label'=>'nom',
                 'multiple'=>true,
                 'required'=>false
+            ])  
+            ->add('imageFile', FileType::class,[
+                'required'=>false,
+                'label' =>'sélection image'
             ])    
             ->add('submit',SubmitType::class, [
                 'label'=>'Enregistrer'
