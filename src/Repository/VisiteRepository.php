@@ -87,8 +87,8 @@ class VisiteRepository extends ServiceEntityRepository
                 ->setMaxResults($nb)
                 ->getQuery()
                 ->getResult();
-        
-    }
+    }   
+   
 
 
 
@@ -118,4 +118,5 @@ class VisiteRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    
 }

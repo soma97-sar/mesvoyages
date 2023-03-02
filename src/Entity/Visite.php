@@ -11,9 +11,9 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
   
@@ -33,6 +33,11 @@ class Visite
      * @var File|null
      */
     private $imageFile;
+    /**
+    * @ORM\Column(type="integer", nullable=true)
+    * @Assert\Range(min = 0, max=20)
+    */
+    private $note;
      
     /**
      *
@@ -56,8 +61,10 @@ class Visite
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTimeInterface $datecreation = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $note = null;
+    
+    //#[ORM\Column(nullable: true)]
+    //private ?int $note = null;
+   
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $avis = null;
@@ -65,8 +72,15 @@ class Visite
     #[ORM\Column(nullable: true)]
     private ?int $tempmin = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $tempmax = null;
+    //#[ORM\Column(nullable: true)]
+    //private ?int $tempmax = null;
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Assert\GreaterThan(propertyPath="tempmin")
+    */
+    private $tempmax;
+
+
 
     #[ORM\ManyToMany(targetEntity: Environnement::class)]
     private Collection $environnements;
@@ -230,6 +244,12 @@ class Visite
 
         return $this;
     }
+     
+   
+   
+  
+
+
     /**
      * @Assert\Callback
      * @param ExecutionContextInterface $context
@@ -253,6 +273,13 @@ class Visite
                 }
             }
         }
+        
    
     }
+     ///**
+     //* @ORM\Column(type="integer", nullable=true)
+     //* @Assert\Range(min = 0, max=20)
+     //*/
+   // private $note;
+    
 }
