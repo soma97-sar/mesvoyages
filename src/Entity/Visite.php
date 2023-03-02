@@ -38,7 +38,13 @@ class Visite
     * @Assert\Range(min = 0, max=20)
     */
     private $note;
-     
+  // /**
+    // * @ORM\Column(type="date", nullable=true)
+    // * @Assert\LessThanOrEqual("now")
+     //*/
+    //private $datecreation;
+
+
     /**
      *
      * 
